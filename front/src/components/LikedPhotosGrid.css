@@ -1,0 +1,85 @@
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1300px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    .photo-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* 画像のコンテナ */
+.photo-item {
+    width: 100%;
+    margin: 20px;
+    position: relative;
+}
+
+.photo-item :hover {
+    cursor: pointer;
+}
+
+/* 画像のスタイル */
+.photo-grid img {
+    width: 95%;
+    height: 500px;
+
+    object-fit: fill;
+    border: 10px;
+    border-color: antiquewhite;
+}
+
+.unlike-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.unlike-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10;
+}
+
+.unlike-modal button {
+    margin: 10px;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.unlike-modal button:first-of-type {
+    background-color: #5c8196;
+    color: white;
+}
+
+
+.unlike-modal button:last-of-type {
+    background-color: #ddd;
+}
+
+.unlike-modal button:hover {
+    background-color: #436577;
+}

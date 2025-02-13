@@ -1,0 +1,41 @@
+/* ページ全体 */
+.timeout-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* メッセージボックス */
+.timeout-message {
+    color: black;
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 400px;
+}
+
+/* アイコン */
+.timeout-icon {
+    font-size: 50px;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+/* ボタン */
+.login-button {
+    background: #3e5c6e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-button:hover {
+    background: #2c4858;
+}
