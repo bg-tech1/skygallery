@@ -1,0 +1,47 @@
+/* ハンバーガーメニューを考慮した画像グリッド */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* 画像のコンテナ */
+.photo-item {
+    width: 100%;
+    margin: 20px;
+    position: relative;
+}
+
+/* 画像のスタイル */
+.photo-grid img {
+    /* width: 500px;
+    height: 500px; */
+    width: 95%;
+    height: 500px;
+
+    object-fit: fill;
+    border: 10px;
+    border-color: antiquewhite;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}
+
+/* ハートアイコンのデザイン */
+.like-icon {
+    position: absolute;
+    /* 右下に配置 */
+    right: 35px;
+    bottom: 2px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* いいねが押されたときのデザイン */
+.like-icon.liked {
+    color: #3e668b;
+}
+
+/* ホバー時に色を変える */
+.like-icon:hover {
+    color: #3e668b;
+}

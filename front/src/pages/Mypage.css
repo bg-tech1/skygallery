@@ -1,0 +1,13 @@
+.userInfoContainer {
+    width: 100%;
+}
+
+.mypageText {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #97afbe;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 2px -2px gray;
+    background-color: #97afbe;
+}
