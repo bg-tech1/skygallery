@@ -47,6 +47,12 @@
 「いいね」した写真をクリックすると「いいね」を解除することもできます。<br>
 <image src="https://github.com/user-attachments/assets/8eaf9c31-fa5f-4ee9-9e67-7fcf35ed31d3" width="600px" /><br>
 
+### レスポンシブ対応
+
+| 通常画面 | ハンバーガーメニュー&写真の表示数変更 |
+|:-:|:-:|
+|<image src="https://github.com/user-attachments/assets/beb00186-890b-49dd-ae76-1c8c34ddcac4" width="250px" />|<image src="https://github.com/user-attachments/assets/a2f6b89b-45b8-42a2-a788-42c427926b10" width="250px" />|
+
 ### その他
 ログイン後30分以内にアクセスがないとセッションタイムアウトする仕様になっています。<br>
 <image src="https://github.com/user-attachments/assets/8c72d0ac-e67f-465a-a99c-fa6097c6d5e9" width="600px" /><br>
