@@ -42,11 +42,14 @@ func init() {
 	dc.DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
+		return
 	}
 
 	// テーブルを自動マイグレーション
 	err = dc.DB.AutoMigrate(&domain.User{}, &domain.LikedPhoto{})
 	if err != nil {
 		log.Fatalf("Migration failed: %v", err)
+		return
 	}
+	fmt.Println("Initializing database successful")
 }
