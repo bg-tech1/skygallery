@@ -40,5 +40,5 @@ jobs:
         with:
           push: true
           provenance: false
-          tags: ${{ env.ECR_REGISTRY }}/sample-image-ecr:latest
+          tags: ${{ env.ECR_REGISTRY }}/develop/skygallery:latest
           context: ./backend
