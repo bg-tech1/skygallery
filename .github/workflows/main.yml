@@ -30,11 +30,6 @@ jobs:
           role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login to Amazon ECR  
-        run: |
-          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
-      - name: Debug IAM Identity
-        run: aws sts get-caller-identity
       - name: Build and push API
         uses: docker/build-push-action@v5
         with:
