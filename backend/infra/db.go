@@ -18,15 +18,26 @@ var dc DbConnection
 
 func init() {
 	var err error
-
-	dsn := fmt.Sprintf(
-		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		os.Getenv("POSTGRES_HOSTNAME"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("POSTGRES_USER"),
-		os.Getenv("POSTGRES_PASSWORD"),
-		os.Getenv("POSTGRES_DB"),
-	)
+	var dsn string
+	if os.Getenv("APP_ENV") == "local" {
+		dsn = fmt.Sprintf(
+			"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+			os.Getenv("POSTGRES_LOCAL_HOSTNAME"),
+			os.Getenv("DB_PORT"),
+			os.Getenv("POSTGRES_LOCAL_USER"),
+			os.Getenv("POSTGRES_PLOCAL_ASSWORD"),
+			os.Getenv("POSTGRES_LOCAL_DB"),
+		)
+	} else {
+		dsn = fmt.Sprintf(
+			"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+			os.Getenv("POSTGRES_HOSTNAME"),
+			os.Getenv("DB_PORT"),
+			os.Getenv("POSTGRES_USER"),
+			os.Getenv("POSTGRES_PASSWORD"),
+			os.Getenv("POSTGRES_DB"),
+		)
+	}
 
 	dc.DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
