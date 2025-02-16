@@ -20,9 +20,7 @@ services:
     build: ./backend
     volumes:
       - ./backend:/app
-    # command: sleep infinity
     command: air
-    # network_mode: service:db
     depends_on:
       - db
       - redis
