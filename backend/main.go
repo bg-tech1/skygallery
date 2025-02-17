@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"skygallery/interface/handler"
 
@@ -21,4 +22,7 @@ func main() {
 	handler.SetupRoutes(r)
 
 	r.Run(":8080") // サーバー起動
+
+	// デバック用
+	fmt.Println("listening to port 8080 host :", os.Getenv("REACT_APP_API_BASE_URL"))
 }
