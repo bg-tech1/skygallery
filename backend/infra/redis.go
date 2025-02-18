@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,7 @@ var conn *redis.Client
 
 func init() {
 	conn = redis.NewClient(&redis.Options{
-		Addr:     "redis:6379",
+		Addr:     os.Getenv("REDIS_HOSTNAME"),
 		Password: "",
 		DB:       0,
 	})
@@ -30,9 +31,9 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 	}
 	newRedisKey := base64.URLEncoding.EncodeToString(b)
 	if err := conn.Set(c, newRedisKey, redisValue, SessionTimeout).Err(); err != nil {
-		panic("Session登録時にエラーが発生：" + err.Error())
+		panic("Session登録時にエラーが発生:" + err.Error())
 	}
-	c.SetCookie(cookieKey, newRedisKey, int(SessionTimeout.Seconds()), "/", "localhost", true, false)
+	c.SetCookie(cookieKey, newRedisKey, int(SessionTimeout.Seconds()), "/", "", true, false)
 }
 
 func GetSession(c *gin.Context, cookieKey string) interface{} {
@@ -47,12 +48,12 @@ func GetSession(c *gin.Context, cookieKey string) interface{} {
 		fmt.Println("SessionKeyが登録されていません。")
 		return nil
 	case err != nil:
-		fmt.Println("Session取得時にエラー発生：" + err.Error())
+		fmt.Println("Session取得時にエラー発生:" + err.Error())
 		return nil
 	}
 	conn.Expire(c, redisKey, SessionTimeout)
 
-	c.SetCookie(cookieKey, redisKey, int(SessionTimeout.Seconds()), "/", "localhost", true, true)
+	c.SetCookie(cookieKey, redisKey, int(SessionTimeout.Seconds()), "/", "", true, true)
 
 	return redisValue
 }
@@ -60,5 +61,5 @@ func GetSession(c *gin.Context, cookieKey string) interface{} {
 func DeleteSession(c *gin.Context, cookieKey string) {
 	redisId, _ := c.Cookie(cookieKey)
 	conn.Del(c, redisId)
-	c.SetCookie(cookieKey, "", -1, "/", "localhost", false, false)
+	c.SetCookie(cookieKey, "", -1, "/", "", false, false)
 }
