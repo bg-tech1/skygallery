@@ -29,9 +29,10 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 	if _, err := io.ReadFull(rand.Reader, b); err != nil {
 		panic("ランダムな文字作成時にエラーが発生しました。")
 	}
+
 	newRedisKey := base64.URLEncoding.EncodeToString(b)
 	if err := conn.Set(c, newRedisKey, redisValue, SessionTimeout).Err(); err != nil {
-		panic("Session登録時にエラーが発生:" + err.Error())
+		panic("Session登録時にエラーが発生:" + err.Error() + "hostname:" + os.Getenv("REDIS_HOSTNAME"))
 	}
 	c.SetCookie(cookieKey, newRedisKey, int(SessionTimeout.Seconds()), "/", "", true, false)
 }
