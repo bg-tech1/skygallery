@@ -16,6 +16,7 @@ func SetupRoutes(r *gin.Engine) {
 	r.POST("/logout", logoutHandler)
 	r.POST("/register", registerUserHandler)
 	r.POST("/registerPhoto", registerLikedPhotosHandler)
+	r.GET("healthz", healthCheckHandler)
 	r.GET("/home", homePageHandler)
 	r.GET("/selectLikedPhoto", selectLikedPhotoHandler)
 	r.GET("/userinfo", userInfoHandler)
@@ -41,6 +42,10 @@ func deleteUnlikedPhotoHandler(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{"message": "UpdateLikedPhtosStatus successful"})
 	}
+}
+
+func healthCheckHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": "ok"})
 }
 
 func homePageHandler(c *gin.Context) {
