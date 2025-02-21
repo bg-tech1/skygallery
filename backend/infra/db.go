@@ -25,7 +25,7 @@ func init() {
 			os.Getenv("POSTGRES_LOCAL_HOSTNAME"),
 			os.Getenv("DB_PORT"),
 			os.Getenv("POSTGRES_LOCAL_USER"),
-			os.Getenv("POSTGRES_PLOCAL_ASSWORD"),
+			os.Getenv("POSTGRES_LOCAL_PASSWORD"),
 			os.Getenv("POSTGRES_LOCAL_DB"),
 		)
 	} else {

@@ -17,7 +17,6 @@ func SetupRoutes(r *gin.Engine) {
 	r.POST("/register", registerUserHandler)
 	r.POST("/registerPhoto", registerLikedPhotosHandler)
 	r.GET("healthz", healthCheckHandler)
-	r.GET("/home", homePageHandler)
 	r.GET("/selectLikedPhoto", selectLikedPhotoHandler)
 	r.GET("/userinfo", userInfoHandler)
 }
@@ -40,23 +39,12 @@ func deleteUnlikedPhotoHandler(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Unexpected Error"})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"message": "UpdateLikedPhtosStatus successful"})
+		c.JSON(http.StatusOK, gin.H{"message": "Update likedPhtosStatus successful"})
 	}
 }
 
 func healthCheckHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"status": "ok"})
-}
-
-func homePageHandler(c *gin.Context) {
-	cookieKey := os.Getenv("LOGIN_USER_ID_KEY")
-	username := infra.GetSession(c, cookieKey)
-	if username == nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"message": "Login Failed"})
-	} else {
-		// TODO:messageを修正する
-		c.JSON(http.StatusOK, gin.H{"message": "Login successful", "username": username})
-	}
 }
 
 func loginHandler(c *gin.Context) {
@@ -74,7 +62,7 @@ func loginHandler(c *gin.Context) {
 		infra.NewSession(c, cookieKey, user.Username)
 		c.JSON(http.StatusOK, gin.H{"message": "Login successful"})
 	} else {
-		c.JSON(http.StatusUnauthorized, gin.H{"message": "Login Failed"})
+		c.JSON(http.StatusUnauthorized, gin.H{"message": "Login failed"})
 	}
 }
 
@@ -114,7 +102,7 @@ func registerLikedPhotosHandler(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register liked photos!!"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "Register LikedPhotos Successful"})
+	c.JSON(http.StatusOK, gin.H{"message": "Register likedPhotos successful"})
 }
 
 func selectLikedPhotoHandler(c *gin.Context) {
@@ -129,7 +117,7 @@ func selectLikedPhotoHandler(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Cannot get likedPhotos"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "Successful", "photo": LikedPhotoArray})
+	c.JSON(http.StatusOK, gin.H{"message": "Select LikedPhotos successful", "photo": LikedPhotoArray})
 }
 
 func userInfoHandler(c *gin.Context) {
@@ -139,5 +127,5 @@ func userInfoHandler(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Session expired"})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"message": "Get UserInfo Successful", "username": username})
+	c.JSON(http.StatusOK, gin.H{"message": "Get userInfo successful", "username": username})
 }
