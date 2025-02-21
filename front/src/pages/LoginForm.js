@@ -16,7 +16,6 @@ const LoginForm = () => {
         password
       })
       setError("")
-      responce = await apiClient.get("/home");
       navigate("/mypage", { state: { username: username } });
     } catch (error) {
       console.log(error)
