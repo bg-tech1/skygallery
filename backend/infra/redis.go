@@ -34,7 +34,7 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 	if err := conn.Set(c, newRedisKey, redisValue, SessionTimeout).Err(); err != nil {
 		panic("Session登録時にエラーが発生:" + err.Error() + "hostname:" + os.Getenv("REDIS_HOSTNAME"))
 	}
-	c.SetCookie(cookieKey, newRedisKey, int(SessionTimeout.Seconds()), "/", "", true, false)
+	c.SetCookie(cookieKey, newRedisKey, int(SessionTimeout.Seconds()), "/", "", true, true)
 }
 
 func GetSession(c *gin.Context, cookieKey string) interface{} {
